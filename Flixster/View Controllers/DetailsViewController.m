@@ -31,7 +31,7 @@
     NSString *fullBackdropURLString = [baseURLString stringByAppendingString: backdropURLString];
     NSURL *fullBackdropURL = [NSURL URLWithString: fullBackdropURLString];
     [self.backdropImageView setImageWithURL:fullBackdropURL];
-    self.titleLabel.text = self.movie[@"overview"];
+    self.titleLabel.text = self.movie[@"title"];
     self.descriptionLabel.text = self.movie[@"overview"];
     
     [self.titleLabel sizeToFit];
