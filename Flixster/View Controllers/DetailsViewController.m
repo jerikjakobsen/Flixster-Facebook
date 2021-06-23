@@ -6,6 +6,7 @@
 //
 
 #import "DetailsViewController.h"
+#import "UIImageView+AFNetworking.h"
 
 @interface DetailsViewController ()
 @property (weak, nonatomic) IBOutlet UIImageView *backdropImageView;
@@ -19,7 +20,22 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Do any additional setup after loading the view.
+    
+    NSString *baseURLString = @"https://image.tmdb.org/t/p/w500";
+    NSString *posterURLString = self.movie[@"poster_path"];
+    NSString *fullPosterURLString = [baseURLString stringByAppendingString: posterURLString];
+    NSURL *fullPosterURL = [NSURL URLWithString: fullPosterURLString];
+    
+    [self.posterImageView setImageWithURL:fullPosterURL];
+    NSString *backdropURLString = self.movie[@"backdrop_path"];
+    NSString *fullBackdropURLString = [baseURLString stringByAppendingString: backdropURLString];
+    NSURL *fullBackdropURL = [NSURL URLWithString: fullBackdropURLString];
+    [self.backdropImageView setImageWithURL:fullBackdropURL];
+    self.titleLabel.text = self.movie[@"overview"];
+    self.descriptionLabel.text = self.movie[@"overview"];
+    
+    [self.titleLabel sizeToFit];
+    [self.descriptionLabel sizeToFit];
 }
 
 /*
