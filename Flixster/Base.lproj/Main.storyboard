@@ -29,25 +29,37 @@
                                             <rect key="frame" x="0.0" y="0.0" width="414" height="206"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="aAI-61-87F">
-                                                    <rect key="frame" x="20" y="8" width="131" height="184"/>
-                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES"/>
+                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="aAI-61-87F">
+                                                    <rect key="frame" x="8" y="16" width="125.5" height="182"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" secondItem="aAI-61-87F" secondAttribute="height" multiplier="131:190" id="Fb4-D1-7Gk"/>
+                                                    </constraints>
                                                 </imageView>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Movie Title" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="S0S-ub-bTA">
-                                                    <rect key="frame" x="171" y="11" width="223" height="40"/>
-                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                    <fontDescription key="fontDescription" type="system" weight="medium" pointSize="22"/>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Movie Title" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="S0S-ub-bTA">
+                                                    <rect key="frame" x="141.5" y="16" width="264.5" height="23.5"/>
+                                                    <fontDescription key="fontDescription" name="Menlo-Regular" family="Menlo" pointSize="20"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Lorem Ipsum asdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasd" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6ee-6m-mCL">
-                                                    <rect key="frame" x="159" y="70" width="235" height="125"/>
-                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Lorem Ipsum asdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasd" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6ee-6m-mCL">
+                                                    <rect key="frame" x="141.5" y="47.5" width="264.5" height="61"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                             </subviews>
+                                            <constraints>
+                                                <constraint firstItem="6ee-6m-mCL" firstAttribute="leading" secondItem="aAI-61-87F" secondAttribute="trailing" constant="8" id="1h7-ex-Gzz"/>
+                                                <constraint firstAttribute="trailing" secondItem="S0S-ub-bTA" secondAttribute="trailing" constant="8" id="6yi-wl-rdU"/>
+                                                <constraint firstAttribute="trailing" secondItem="6ee-6m-mCL" secondAttribute="trailing" constant="8" id="87l-W5-7Fe"/>
+                                                <constraint firstItem="aAI-61-87F" firstAttribute="leading" secondItem="4R6-Zh-YbT" secondAttribute="leading" constant="8" id="PXg-3V-2ph"/>
+                                                <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="6ee-6m-mCL" secondAttribute="bottom" constant="8" id="Qe3-lJ-w6q"/>
+                                                <constraint firstAttribute="bottom" secondItem="aAI-61-87F" secondAttribute="bottom" constant="8" id="SBs-An-ueG"/>
+                                                <constraint firstItem="S0S-ub-bTA" firstAttribute="top" secondItem="4R6-Zh-YbT" secondAttribute="top" constant="16" id="d93-cN-0o6"/>
+                                                <constraint firstItem="6ee-6m-mCL" firstAttribute="top" secondItem="S0S-ub-bTA" secondAttribute="bottom" constant="8" id="kff-eP-8GJ"/>
+                                                <constraint firstItem="aAI-61-87F" firstAttribute="top" secondItem="4R6-Zh-YbT" secondAttribute="top" constant="16" id="tUb-4o-0Km"/>
+                                                <constraint firstItem="S0S-ub-bTA" firstAttribute="leading" secondItem="aAI-61-87F" secondAttribute="trailing" constant="8" id="zlZ-49-CXV"/>
+                                            </constraints>
                                         </tableViewCellContentView>
                                         <connections>
                                             <outlet property="descriptionLabel" destination="6ee-6m-mCL" id="Jrm-QZ-gSI"/>
@@ -69,7 +81,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="499" y="583"/>
+            <point key="canvasLocation" x="498.55072463768118" y="582.58928571428567"/>
         </scene>
         <!--Movies Grid View Controller-->
         <scene sceneID="4IV-Yv-2uG">
@@ -182,7 +194,7 @@
             <objects>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="nW6-zN-DgU" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
                 <tabBarController id="b6G-AM-6RT" sceneMemberID="viewController">
-                    <tabBar key="tabBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="0Ar-gu-Wc1">
+                    <tabBar key="tabBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionIndicatorImage="projector_tabbar_item" id="0Ar-gu-Wc1">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="49"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -195,11 +207,11 @@
             </objects>
             <point key="canvasLocation" x="987" y="-1052"/>
         </scene>
-        <!--Item-->
+        <!--Navigation Controller-->
         <scene sceneID="sme-6h-8G8">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="SSn-3I-NDX" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Item" id="Ng7-Z5-ise"/>
+                    <tabBarItem key="tabBarItem" title="" selectedImage="projector_tabbar_item" id="Ng7-Z5-ise"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="5gB-Wo-MR5">
                         <rect key="frame" x="0.0" y="44" width="414" height="44"/>
@@ -214,11 +226,11 @@
             </objects>
             <point key="canvasLocation" x="499" y="-254"/>
         </scene>
-        <!--Item-->
+        <!--Navigation Controller-->
         <scene sceneID="DwI-aE-EMt">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="IrI-KN-6w4" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Item" id="JTX-t0-QLN"/>
+                    <tabBarItem key="tabBarItem" title="" selectedImage="reel_tabbar_icon" id="JTX-t0-QLN"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="XQA-nK-zSV">
                         <rect key="frame" x="0.0" y="44" width="414" height="44"/>
@@ -235,6 +247,8 @@
         </scene>
     </scenes>
     <resources>
+        <image name="projector_tabbar_item" width="21" height="25"/>
+        <image name="reel_tabbar_icon" width="25" height="25"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>
