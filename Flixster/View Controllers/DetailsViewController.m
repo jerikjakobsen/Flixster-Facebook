@@ -7,6 +7,7 @@
 
 #import "DetailsViewController.h"
 #import "UIImageView+AFNetworking.h"
+#import "TrailerViewController.h"
 
 @interface DetailsViewController ()
 @property (weak, nonatomic) IBOutlet UIImageView *backdropImageView;
@@ -48,6 +49,30 @@
     [self.titleLabel sizeToFit];
     [self.descriptionLabel sizeToFit];
 }
+- (IBAction)tapped:(id)sender {
+    NSLog(@"tapped");
+}
 
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+    TrailerViewController *tvc = segue.destinationViewController;
+    tvc.movieID = self.movie[@"id"];
+}
 
+- (IBAction)saveMovie:(id)sender {
+    
+    // get array
+    // add movie to array (if no array, create array with movie in it)
+    // save it back to user defaults
+    
+    NSArray *savedMovies = [NSUserDefaults.standardUserDefaults stringArrayForKey:@"savedMovies"];
+    NSLog(@"%@", savedMovies);
+
+    if (savedMovies == nil) {
+        savedMovies = @[self.movie[@"id"]];
+    } else {
+        savedMovies = [savedMovies arrayByAddingObject:self.movie[@"id"]];
+    }
+    NSLog(@"%@", savedMovies);
+    [NSUserDefaults.standardUserDefaults setObject:savedMovies forKey:@"savedMovies"];
+}
 @end

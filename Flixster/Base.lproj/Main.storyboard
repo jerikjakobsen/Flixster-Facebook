@@ -194,13 +194,20 @@
                                 <subviews>
                                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="dZM-bw-fWh">
                                         <rect key="frame" x="0.0" y="-88" width="414" height="362"/>
+                                        <gestureRecognizers/>
                                     </imageView>
-                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="vap-je-JLh">
+                                    <imageView clipsSubviews="YES" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="vap-je-JLh">
                                         <rect key="frame" x="21" y="139" width="131" height="184"/>
+                                        <gestureRecognizers/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="131" id="bnT-e8-emJ"/>
+                                            <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="131" id="fJv-bG-OoQ"/>
                                             <constraint firstAttribute="height" constant="184" id="wfj-pg-glx"/>
+                                            <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="184" id="z26-m8-yd4"/>
                                         </constraints>
+                                        <connections>
+                                            <outletCollection property="gestureRecognizers" destination="WOp-Bm-ULi" appends="YES" id="rrp-xE-EUJ"/>
+                                        </connections>
                                     </imageView>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="NoA-6C-f1d">
                                         <rect key="frame" x="21" y="376" width="370" height="20.5"/>
@@ -220,8 +227,17 @@
                                         <color key="textColor" red="1" green="0.99997597930000004" blue="1" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                         <nil key="highlightedColor"/>
                                     </label>
+                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9En-5V-3xc">
+                                        <rect key="frame" x="366" y="282" width="34" height="30"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <state key="normal" title="Save"/>
+                                        <connections>
+                                            <action selector="saveMovie:" destination="lpZ-8W-WMh" eventType="touchUpInside" id="f6n-VX-y0c"/>
+                                        </connections>
+                                    </button>
                                 </subviews>
                                 <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <gestureRecognizers/>
                                 <constraints>
                                     <constraint firstItem="NoA-6C-f1d" firstAttribute="top" secondItem="68d-nP-cE4" secondAttribute="bottom" constant="53" id="545-fC-hbi"/>
                                     <constraint firstItem="dZM-bw-fWh" firstAttribute="trailing" secondItem="D4D-Fa-weq" secondAttribute="trailing" id="PKb-sM-rW0"/>
@@ -258,13 +274,47 @@
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="zis-on-Uab" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+                <tapGestureRecognizer id="WOp-Bm-ULi">
+                    <connections>
+                        <action selector="tapped:" destination="lpZ-8W-WMh" id="W7z-rl-AxG"/>
+                        <segue destination="Tiy-69-PHW" kind="presentation" id="pNq-0c-WQu"/>
+                    </connections>
+                </tapGestureRecognizer>
             </objects>
-            <point key="canvasLocation" x="498.55072463768118" y="1370.7589285714284"/>
+            <point key="canvasLocation" x="430" y="1371"/>
+        </scene>
+        <!--Trailer View Controller-->
+        <scene sceneID="s9Y-pT-OZ5">
+            <objects>
+                <viewController id="Tiy-69-PHW" customClass="TrailerViewController" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="hci-jf-GgG">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <wkWebView contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="sNL-Uy-lJM">
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" red="0.36078431370000003" green="0.38823529410000002" blue="0.4039215686" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <wkWebViewConfiguration key="configuration">
+                                    <audiovisualMediaTypes key="mediaTypesRequiringUserActionForPlayback" none="YES"/>
+                                    <wkPreferences key="preferences"/>
+                                </wkWebViewConfiguration>
+                            </wkWebView>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="uFN-JU-y0p"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                    </view>
+                    <connections>
+                        <outlet property="trailerView" destination="sNL-Uy-lJM" id="mrU-JS-Er1"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="B1z-WS-ubq" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1509" y="1371"/>
         </scene>
         <!--Tab Bar Controller-->
         <scene sceneID="sH8-en-2il">
             <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="nW6-zN-DgU" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
                 <tabBarController id="b6G-AM-6RT" sceneMemberID="viewController">
                     <tabBar key="tabBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="0Ar-gu-Wc1">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="49"/>
@@ -276,6 +326,7 @@
                         <segue destination="IrI-KN-6w4" kind="relationship" relationship="viewControllers" id="nBT-xO-RFP"/>
                     </connections>
                 </tabBarController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="nW6-zN-DgU" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="987" y="-1052"/>
         </scene>

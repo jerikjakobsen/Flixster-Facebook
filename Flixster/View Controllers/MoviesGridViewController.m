@@ -169,6 +169,9 @@
         self.shadowView = [[UIView alloc] init];
         CGRect shadowFrame = CGRectMake(0, 0, 414, 900);
         self.shadowView.frame = shadowFrame;
+        UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] init];
+        //tap addTarget:<#(nonnull id)#> action:<#(nonnull SEL)#>
+        //[self.shadowView addGestureRecognizer:]
         [self.view addSubview:self.shadowView];
         self.shadowView.backgroundColor = UIColor.systemGray2Color;
         self.shadowView.alpha = 0.0;
@@ -234,8 +237,6 @@
                                   
 - (NSString *)pickerView:(UIPickerView *)pickerView titleForRow:(NSInteger)row forComponent:(NSInteger)component {
     if (pickerView.tag == 0) {
-        NSLog(@"%d", row);
-
         return self.genres[row][@"name"];
     }
         else return [NSString stringWithFormat: @"%ld", 2021 - row];

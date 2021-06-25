@@ -27,7 +27,7 @@
     // Do any additional setup after loading the view.
     self.tableView.dataSource = self;
     self.tableView.delegate = self;
-    
+    self.searchBar.delegate = self;
     
     [self getMovies];
     self.refreshControl = [[UIRefreshControl alloc] init];
@@ -105,5 +105,27 @@
     DetailsViewController *detailsViewController = [segue destinationViewController];
     detailsViewController.movie = movie;
 }
+- (void)searchBar:(UISearchBar *)searchBar textDidChange:(NSString *)searchText {
+    if (searchText.length != 0) {
+    NSPredicate *predicate = [NSPredicate predicateWithBlock:^BOOL(id evaluatedObject, NSDictionary<NSString *,id> * bindings) {
+        NSString *searchTextLowercase = [searchText lowercaseString];
+        for (int i = searchTextLowercase.length - 1; i >= 0; i--) {
+            if ([searchTextLowercase characterAtIndex: i] ) {
+                break;
+            } else searchTextLowercase = [searchTextLowercase substringToIndex:i];
+        }
+        NSString *evalobj = evaluatedObject[@"title"];
+        return [[evalobj lowercaseString] containsString: searchTextLowercase];
+    } ];
+    self.filteredMovies = [self.movies filteredArrayUsingPredicate:predicate];
+    } else {
+        self.filteredMovies = self.movies;
+    }
+    [self.tableView reloadData];
+    
+}
 
+- (void)searchBarTextDidBeginEditing:(UISearchBar *)searchBar {
+    self.searchBar.showsCancelButton = true;
+}
 @end
