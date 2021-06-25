@@ -9,6 +9,7 @@
 #import "MBProgressHUD.h"
 #import "UIImageView+AFNetworking.h"
 #import "MovieCollectionViewCell.h"
+#import "DetailsViewController.h"
 
 @interface MoviesGridViewController () < UICollectionViewDelegate, UICollectionViewDataSource, UIPickerViewDelegate, UIPickerViewDataSource>
 @property (weak, nonatomic) IBOutlet UICollectionView *collectionView;
@@ -112,7 +113,7 @@
     [task resume];
 }
 
-- (void) getMoviesWithFilter: (NSString *) genre and: (NSString *) year {
+- (void) getMoviesWithFilter {
     MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated: YES];
     hud.label.text = @"Loading...";
     hud.offset = CGPointMake(0, -200);
@@ -123,10 +124,8 @@
             [MBProgressHUD hideHUDForView:self.view animated: YES];
         });
     });
-    int selectedRow = [self.releaseYearPickerView selectedRowInComponent:0];
+    int selectedRow = [self.genresPickerView selectedRowInComponent:0];
     NSURL *url = [NSURL URLWithString: [NSString stringWithFormat: @"https://api.themoviedb.org/3/discover/movie?api_key=a07e22bc18f5cb106bfe4cc1f83ad8ed&language=en-US&sort_by=popularity.desc&include_adult=false&include_video=false&page=1&primary_release_year=%ld&with_genres=%@", 2021 - [self.releaseYearPickerView selectedRowInComponent:0],  self.genres[selectedRow][@"id"]]];
-    NSLog(@"%@", self.genres[selectedRow][@"name"]);
-    NSLog(@"%@", url);
     NSURLRequest *request = [NSURLRequest requestWithURL: url cachePolicy:NSURLRequestReloadIgnoringLocalCacheData timeoutInterval: 10.0];
     NSURLSession *session = [NSURLSession sessionWithConfiguration:[NSURLSessionConfiguration defaultSessionConfiguration] delegate: nil delegateQueue: [NSOperationQueue mainQueue]];
     NSURLSessionDataTask *task = [session dataTaskWithRequest: request completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
@@ -137,7 +136,7 @@
                 [hud hideAnimated:true];
                 [hud removeFromSuperview];
                 UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"No Internet Connection" message:@"oops! You aren't connected to the internet." preferredStyle:(UIAlertControllerStyleAlert)];
-                UIAlertAction *tryAgainAction = [UIAlertAction actionWithTitle:@"Try again" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+                UIAlertAction *tryAgainAction = [UIAlertAction actionWithTitle:@"Try Again" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
                     [self getMovies];
                 }];
                 [alert addAction:tryAgainAction];
@@ -146,7 +145,6 @@
         } else {
             NSDictionary *dataDictionary = [NSJSONSerialization JSONObjectWithData: data options:NSJSONReadingMutableContainers error:nil];
             self.movies = dataDictionary[@"results"];
-            NSLog(@"%@", dataDictionary);
             [self.collectionView reloadData];
         }
         [self.refreshControl endRefreshing];
@@ -156,19 +154,17 @@
     [task resume];
 }
 
-
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
+    UICollectionViewCell *tappedCell = sender;
+    NSIndexPath *indexPath = [self.collectionView indexPathForCell: tappedCell];
+    NSDictionary *movie = self.movies[indexPath.row];
+    DetailsViewController *detailsViewController = [segue destinationViewController];
+    detailsViewController.movie = movie;
+    
 }
-*/
+
 - (IBAction)onFilter:(id)sender {
-    //drop down menu
-    // grey out collection view
+
     if (!self.filterTabShowing) {
         self.shadowView = [[UIView alloc] init];
         CGRect shadowFrame = CGRectMake(0, 0, 414, 900);
@@ -187,7 +183,7 @@
         self.shadowView.backgroundColor = UIColor.systemGray2Color;
     }];
     } else {
-        [self getMoviesWithFilter:@"Action" and: @"2001"];
+        [self getMoviesWithFilter];
 
         [UIView animateWithDuration: 0.3 animations:^{
             CGRect genresFrame = self.filtersView.frame;
@@ -237,8 +233,13 @@
 }
                                   
 - (NSString *)pickerView:(UIPickerView *)pickerView titleForRow:(NSInteger)row forComponent:(NSInteger)component {
-        if (pickerView.tag == 0) return self.genres[row][@"name"];
+    if (pickerView.tag == 0) {
+        NSLog(@"%d", row);
+
+        return self.genres[row][@"name"];
+    }
         else return [NSString stringWithFormat: @"%ld", 2021 - row];
+    
     }
 
 @end

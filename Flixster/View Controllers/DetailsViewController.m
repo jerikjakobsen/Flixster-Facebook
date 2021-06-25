@@ -13,6 +13,7 @@
 @property (weak, nonatomic) IBOutlet UIImageView *posterImageView;
 @property (weak, nonatomic) IBOutlet UILabel *titleLabel;
 @property (weak, nonatomic) IBOutlet UILabel *descriptionLabel;
+@property (weak, nonatomic) IBOutlet UILabel *dateLabel;
 
 @end
 
@@ -33,19 +34,20 @@
     [self.backdropImageView setImageWithURL:fullBackdropURL];
     self.titleLabel.text = self.movie[@"title"];
     self.descriptionLabel.text = self.movie[@"overview"];
+    NSDateComponents *dateComponents = [[NSDateComponents alloc] init];
+    NSString *g = @"hello";
+    NSInteger *day = [[self.movie[@"release_date"] substringWithRange: NSMakeRange(8, 2)] integerValue];
+    NSInteger *month = [[self.movie[@"release_date"] substringWithRange: NSMakeRange(5, 2)] integerValue];
+    NSInteger *year = [[self.movie[@"release_date"] substringWithRange: NSMakeRange(0, 4)] integerValue];
+    [dateComponents setDay: day];
+    [dateComponents setMonth: month];
+    [dateComponents setYear: year];
+    NSDate *date = [[NSCalendar currentCalendar] dateFromComponents: dateComponents];
     
+    self.dateLabel.text = [NSDateFormatter localizedStringFromDate: date dateStyle: NSDateFormatterMediumStyle timeStyle:NSDateFormatterNoStyle];
     [self.titleLabel sizeToFit];
     [self.descriptionLabel sizeToFit];
 }
 
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
 
 @end
