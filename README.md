@@ -1,8 +1,8 @@
-# Project 2 - *Name of App Here*
+# Project 2 - *Flixster*
 
 **Name of your app** is a movies app using the [The Movie Database API](http://docs.themoviedb.apiary.io/#).
 
-Time spent: **X** hours spent in total
+Time spent: **25** hours spent in total
 
 ## User Stories
 
