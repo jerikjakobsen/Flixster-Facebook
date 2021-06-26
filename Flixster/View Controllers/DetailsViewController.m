@@ -63,16 +63,21 @@
     // get array
     // add movie to array (if no array, create array with movie in it)
     // save it back to user defaults
-    
-    NSArray *savedMovies = [NSUserDefaults.standardUserDefaults stringArrayForKey:@"savedMovies"];
-    NSLog(@"%@", savedMovies);
 
-    if (savedMovies == nil) {
-        savedMovies = @[self.movie[@"id"]];
-    } else {
-        savedMovies = [savedMovies arrayByAddingObject:self.movie[@"id"]];
+
+    NSUserDefaults *UD = [NSUserDefaults standardUserDefaults];
+    NSString *movieID = self.movie[@"id"];
+    NSArray *savedMovies = [[NSUserDefaults standardUserDefaults] dictionaryRepresentation][@"savedMovies"];
+
+    if (savedMovies == nil) savedMovies = @[movieID];
+    else {
+        NSLog(@"HELLO");
+        if (!([savedMovies containsObject: movieID])) savedMovies = [savedMovies arrayByAddingObject: movieID];
     }
-    NSLog(@"%@", savedMovies);
-    [NSUserDefaults.standardUserDefaults setObject:savedMovies forKey:@"savedMovies"];
+    //NSLog(@"%@", savedMovies);
+    [UD setObject:savedMovies forKey:@"savedMovies" ];
+    [UD synchronize];
+    NSLog(@"NSUserDefault: %@", [[NSUserDefaults standardUserDefaults] dictionaryRepresentation]);
+
 }
 @end
